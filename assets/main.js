@@ -1,5 +1,6 @@
 let arrayRand = [];
 let arrayUser = [];
+let confronto = [];
 for (let i = 0; i < 5; i++) {
   let functionRan = randomNumber();
 
@@ -13,26 +14,33 @@ for (let i = 0; i < 5; i++) {
 document.getElementById('rememberNumber').innerHTML = `${arrayRand}`;
 
 function hideElement() {
+  document.getElementById('rememberNumber').style.display = 'none';
+}
+function forCicle() {
   for (let x = 0; x < 5; x++) {
     let findNumber = parseInt(prompt('indovina i numeri king'));
     arrayUser.push(findNumber);
   }
+  document.getElementById('Result').innerHTML = `i numeri che hai inserito sono: ${arrayUser}`;
+  controlCross();
 }
 
-function hideSomthing() {
-  document.getElementById('rememberNumber').style.display = 'none';
+setTimeout(hideElement, 5000);
+setTimeout(forCicle, 5500);
+
+function controlCross() {
+  for (let x = 0; x < arrayRand.length; x++) {
+    for (let k = 0; k < arrayUser.length; k++) {
+      if (arrayRand[x] == arrayUser[k]) {
+        confronto.push(arrayUser[k]);
+      }
+    }
+  }
+  let controlStrong = confronto.length;
+  document.getElementById(
+    'ultraResult'
+  ).innerHTML = `i tuoi numeri corretti sono ${controlStrong} su 5, i numeri da indovinare erano: ${arrayRand}`;
 }
-
-setTimeout(function () {
-  hideSomthing();
-  hideElement();
-}, 5000);
-
-// if(arrayRand.includes(arrayUser)){
-//     document.getElementById('Result').innerText = "HAI VINTO"
-// }else{
-//     document.getElementById('Result').innerText = "HAI PERSO"
-// }
 
 console.log(arrayRand);
 console.log(arrayUser);
